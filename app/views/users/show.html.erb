@@ -1,5 +1,11 @@
 <h1>My Page</h1>
 <p><%= @user.name %>, <%= @user.email %></p>
+<ul>
+  <% @microposts.each do |micropost| %>
+  <li><%= micropost.content %> | <%= link_to "delete", micropost, method: :delete,
+                                       data: { confirm: "You sure?" } %></li>
+  <% end %>
+</ul>
 <p><%= link_to '編集', edit_user_path(current_user) %></p>
 <p><% if current_user.admin? && current_user != @user %>  
      <%= link_to '削除', @user, method: :delete, data: {confirm:'you sure?'} %>

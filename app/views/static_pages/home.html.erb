@@ -1,9 +1,19 @@
 <% if logged_in? %>
 <h1>This is Your page</h1>
-<%= link_to "プロフィール", current_user %>
+<p><%= link_to "プロフィール", current_user %>
 <%= link_to "ユーザー一覧", users_path %>
-<%= link_to "ログアウト", logout_path, method: "delete" %>
-
+<%= link_to "ログアウト", logout_path, method: "delete" %></p>
+<%= form_for(@micropost) do |f| %>
+  <%= f.text_area :content %>
+  <%= f.submit '投稿' %>
+<% end %>
+<ul>
+  <% @microposts.each do |micropost| %>
+  <li>
+    <%= micropost.user.name %> | <%= micropost.content %>
+  </li>
+  <% end %>
+</ul>
 <% else %>
 <div>
   <h1>Welcome to the Sample App</h1>

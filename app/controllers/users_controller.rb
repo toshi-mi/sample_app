@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts
   end
   
   def create
@@ -49,11 +50,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
-     def logged_in_user
-      unless logged_in?
-        redirect_to login_url
-      end
-     end
+     
      
     def admin_user
       redirect_to root_path unless current_user.admin?

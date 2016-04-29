@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
   def hello
     render text: 'hello world!'
   end
+  
+  private
+  
+    def logged_in_user
+      unless logged_in?
+        redirect_to login_url
+      end
+    end
 end
