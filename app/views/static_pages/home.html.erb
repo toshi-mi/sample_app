@@ -1,4 +1,14 @@
+<% if logged_in? %>
+<h1>This is Your page</h1>
+
+<% else %>
 <div>
   <h1>Welcome to the Sample App</h1>
   <%= link_to "Sign up now!", signup_path %>
+  <%= link_to "Log in now!", login_path %>
 </div>
+<small>
+    The Ruby on Rails Tutorial</a>
+    by Michael Hartl</a>
+</small>
+<% end %>
