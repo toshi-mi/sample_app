@@ -1,0 +1,10 @@
+<% provide(:title, @title) %>
+<p><%= @user.name %>, <%= @user.email %></p>
+<p><%= @user.followeds.count %>following | <%= @user.followers.count %>followers</p>
+<ul>
+  <% @users.each do |user| %>
+  <li>
+    <%= link_to user.name, user %>
+  </li>
+  <% end %>
+</ul>

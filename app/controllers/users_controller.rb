@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :show, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :show, :destroy, :followeds, :followers]
   before_action :admin_user, only: :destroy
   
   
@@ -43,6 +43,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to users_path
+  end
+  
+  def followeds
+    @title = "followeds"
+    @user = User.find(params[:id])
+    @users = @user.followeds
+  end
+  
+  def followers
+    @title = "followers"
+    @user = User.find(params[:id])
+    @users = @user.followers
   end
   
   private

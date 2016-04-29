@@ -1,5 +1,20 @@
 <h1>My Page</h1>
 <p><%= @user.name %>, <%= @user.email %></p>
+<p><%= link_to @user.followeds.count, followeds_user_path %>following | <%= link_to @user.followers.count, followers_user_path %>followers</p>
+<% unless current_user == @user %>
+  <% if current_user.followed?(@user) %>
+    <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+             html: { method: :delete }) do |f| %>
+      <%= f.submit "Unfollow"%>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.active_relationships.build) do |f| %>
+      <%= hidden_field_tag :followed_id, @user.id %>
+    <%= f.submit "Follow"%>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
 <ul>
   <% @microposts.each do |micropost| %>
   <li><%= micropost.content %> | <%= link_to "delete", micropost, method: :delete,

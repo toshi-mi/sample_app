@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   get 'contact' => 'static_pages#contact'
   
   get 'signup' => 'users#new'
-  resources :users
+  resources :users do
+    member do
+      get :followers, :followeds
+    end
+  end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   
 
   # The priority is based upon order of creation: first created -> highest priority.
