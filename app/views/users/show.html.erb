@@ -1,1 +1,6 @@
-<%= @user.name %>, <%= @user.email %> 
+<h1>My Page</h1>
+<p><%= @user.name %>, <%= @user.email %></p>
+<p><%= link_to '編集', edit_user_path(current_user) %></p>
+<p><% if current_user.admin? && current_user != @user %>  
+     <%= link_to '削除', @user, method: :delete, data: {confirm:'you sure?'} %>
+   <% end %></p>
